@@ -1,15 +1,13 @@
 import cv2
 import os
 
-# Path to save the collected images
 save_path = r"C:\Users\thani\OneDrive\Documents\SignRecognition\Data\Train"
 label = input("Enter the label for the sign (e.g., 'Hello'): ")
 label_path = os.path.join(save_path, label)
 
-# Create directory if it doesn't exist
 os.makedirs(label_path, exist_ok=True)
 
-cap = cv2.VideoCapture(0)  # Open webcam
+cap = cv2.VideoCapture(0)
 print("Press 's' to start capturing images. Press 'q' to quit.")
 
 count = 0
@@ -22,12 +20,12 @@ while True:
     cv2.imshow("Webcam", frame)
 
     key = cv2.waitKey(1)
-    if key == ord('s'):  # Start saving images
+    if key == ord('s'):
         img_name = os.path.join(label_path, f"{label}_{count}.jpg")
         cv2.imwrite(img_name, frame)
         print(f"Saved: {img_name}")
         count += 1
-    elif key == ord('q'):  # Quit
+    elif key == ord('q'):
         break
 
 cap.release()
