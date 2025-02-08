@@ -3,30 +3,30 @@ import numpy as np
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout  
 from tensorflow.keras.optimizers import Adam
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau 
 
-train_dir = r"C:\signtranslator\Data\Train"
-validation_dir = r"C:\signtranslator\Data\Validation"
-model_save_path = r"C:\signtranslator\Model\trained_model.h5"
+train_dir = r"D:\SignLanguageTranslator\Data\Train"
+validation_dir = r"D:\SignLanguageTranslator\Data\Validation"
+model_save_path = r"D:\SignLanguageTranslator\Model\trained_model.h5"
 
 img_size = (128, 128)
-batch_size = 32
-epochs = 20
+batch_size = 32 
+epochs = 20  
 num_classes = len(os.listdir(train_dir))
 
 train_datagen = ImageDataGenerator(
     rescale=1.0 / 255,
-    rotation_range=40,
-    width_shift_range=0.3,
-    height_shift_range=0.3,
-    shear_range=0.3,
-    zoom_range=0.3,
+    rotation_range=40,  
+    width_shift_range=0.3, 
+    height_shift_range=0.3, 
+    shear_range=0.3,  
+    zoom_range=0.3, 
     horizontal_flip=True,
-    fill_mode='nearest'
+    fill_mode='nearest' 
 )
 
 validation_datagen = ImageDataGenerator(rescale=1.0 / 255)
@@ -51,10 +51,10 @@ base_model.trainable = False
 
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
-x = Dense(512, activation="relu")(x)
-x = Dropout(0.5)(x)
-x = Dense(256, activation="relu")(x)
-x = Dropout(0.3)(x)
+x = Dense(512, activation="relu")(x)  
+x = Dropout(0.5)(x)  
+x = Dense(256, activation="relu")(x) 
+x = Dropout(0.3)(x) 
 output_layer = Dense(num_classes, activation="softmax")(x)
 
 model = Model(inputs=base_model.input, outputs=output_layer)
