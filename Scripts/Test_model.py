@@ -14,7 +14,7 @@ except Exception as e:
     print(f"Error loading model: {e}")
     exit()
 
-labels = ['Yes', 'Hi', 'No', 'Wait For a While', 'And', 'Good', 'L']
+labels = ['Yes', 'Hi', 'No', 'Wait For a While', 'And', 'Good', 'You']
 
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
